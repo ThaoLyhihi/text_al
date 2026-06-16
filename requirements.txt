@@ -1,3 +1,6 @@
 customtkinter>=5.2.0
 python-docx>=1.1.0
 matplotlib>=3.7.0
+# Tùy chọn: bộ tách từ tiếng Việt (CRF) để nhận diện từ ghép chính xác hơn.
+# Nếu không cài, ứng dụng tự động fallback về từ điển tĩnh trong config.py.
+pyvi>=0.1.1

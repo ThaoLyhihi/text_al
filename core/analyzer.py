@@ -68,6 +68,8 @@ def analyze(
     text: str,
     lowercase: bool = True,
     strip_punct: bool = True,
+    expand_abbr: bool = False,
+    detect_compounds: bool = False,
     do_counts: bool = True,
     do_top_n: bool = True,
     top_n: int = config.DEFAULT_N,
@@ -86,7 +88,11 @@ def analyze(
 
     # 2) Chuẩn hóa.
     result.normalized_text = preprocessor.normalize(
-        text, lowercase=lowercase, strip_punct=strip_punct
+        text,
+        lowercase=lowercase,
+        strip_punct=strip_punct,
+        expand_abbr=expand_abbr,
+        detect_compounds=detect_compounds,
     )
 
     # 3) Tần suất từ (dùng cho cả word_count và top_n).
@@ -95,9 +101,12 @@ def analyze(
         result.word_count = sum(freqs.values())
         result.unique_words = len(freqs)
 
-    # 4) Top N.
+    # 4) Top N. Trả nhãn hiển thị thân thiện: từ ghép nối bằng '_' → khoảng trắng.
     if do_top_n:
         n = top_n if isinstance(top_n, int) and top_n > 0 else config.DEFAULT_N
-        result.top_words = freqs.most_common(n)
+        result.top_words = [
+            (word.replace(config.COMPOUND_JOINER, " "), freq)
+            for word, freq in freqs.most_common(n)
+        ]
 
     return result

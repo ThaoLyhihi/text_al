@@ -7,7 +7,7 @@ biết gì về UI — mọi liên kết nằm tại đây.
 from tkinter import filedialog, messagebox
 
 import config
-from core import analyzer
+from core import analyzer, preprocessor
 from ui.main_window import MainWindow
 from utils import file_handler
 
@@ -20,6 +20,9 @@ class Controller:
             on_export=self.handle_export,
         )
         self.last_result = None
+        # Cho người dùng biết bộ tách từ ghép đang hoạt động ở chế độ nào.
+        engine = "pyvi (học máy)" if preprocessor.HAS_PYVI else "từ điển tĩnh"
+        self.view.set_status(f"Sẵn sàng. Nhận diện từ ghép: {engine}.")
 
     # --------------------------------------------------------------- handlers
     def handle_execute(self):

@@ -82,17 +82,21 @@ class MainWindow(ctk.CTk):
 
         self.var_lowercase = ctk.BooleanVar(value=True)
         self.var_strip_punct = ctk.BooleanVar(value=True)
+        self.var_expand_abbr = ctk.BooleanVar(value=True)
+        self.var_compounds = ctk.BooleanVar(value=True)
         self.var_counts = ctk.BooleanVar(value=True)
         self.var_top_n = ctk.BooleanVar(value=True)
 
         self._add_checkbox(sidebar, 8, "Chuyển thành chữ thường", self.var_lowercase)
         self._add_checkbox(sidebar, 9, "Xóa bỏ toàn bộ dấu câu", self.var_strip_punct)
-        self._add_checkbox(sidebar, 10, "Thống kê số lượng (từ, ký tự, câu)", self.var_counts)
-        self._add_checkbox(sidebar, 11, "Tìm Top N từ phổ biến", self.var_top_n)
+        self._add_checkbox(sidebar, 10, "Chuẩn hóa từ viết tắt (ko → không)", self.var_expand_abbr)
+        self._add_checkbox(sidebar, 11, "Nhận diện từ ghép (học sinh, việt nam)", self.var_compounds)
+        self._add_checkbox(sidebar, 12, "Thống kê số lượng (từ, ký tự, câu)", self.var_counts)
+        self._add_checkbox(sidebar, 13, "Tìm Top N từ phổ biến", self.var_top_n)
 
         # Ô nhập N.
         n_frame = ctk.CTkFrame(sidebar, fg_color="transparent")
-        n_frame.grid(row=12, column=0, sticky="ew", padx=40, pady=(2, 14))
+        n_frame.grid(row=14, column=0, sticky="ew", padx=40, pady=(2, 14))
         ctk.CTkLabel(
             n_frame, text="Giá trị N:", text_color=config.COLOR_TEXT,
             font=(config.FONT_FAMILY, config.FONT_SIZE_NORMAL),
@@ -106,8 +110,8 @@ class MainWindow(ctk.CTk):
             sidebar, text="Sẵn sàng.", text_color=config.COLOR_TEXT_MUTED,
             font=(config.FONT_FAMILY, config.FONT_SIZE_NORMAL), anchor="w", wraplength=250,
         )
-        self.status_label.grid(row=13, column=0, sticky="sew", padx=18, pady=(10, 14))
-        sidebar.grid_rowconfigure(13, weight=1)
+        self.status_label.grid(row=15, column=0, sticky="sew", padx=18, pady=(10, 14))
+        sidebar.grid_rowconfigure(15, weight=1)
 
     def _add_checkbox(self, master, row, text, variable):
         ctk.CTkCheckBox(
@@ -231,6 +235,8 @@ class MainWindow(ctk.CTk):
         return {
             "lowercase": self.var_lowercase.get(),
             "strip_punct": self.var_strip_punct.get(),
+            "expand_abbr": self.var_expand_abbr.get(),
+            "detect_compounds": self.var_compounds.get(),
             "do_counts": self.var_counts.get(),
             "do_top_n": self.var_top_n.get(),
             "top_n": n,

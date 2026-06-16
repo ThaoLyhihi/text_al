@@ -42,6 +42,48 @@ REGEX_PUNCTUATION = r"[^\w\s]"
 SENTENCE_TERMINATORS = ".?!"
 
 # ---------------------------------------------------------------------------
+# Từ viết tắt thông dụng → dạng đầy đủ (dùng cho chuẩn hóa)
+# ---------------------------------------------------------------------------
+# Khóa luôn ở chữ thường; việc so khớp thực hiện trên token đã hạ chữ thường.
+ABBREVIATIONS = {
+    "ko": "không", "k": "không", "kg": "không", "khg": "không", "hok": "không",
+    "đc": "được", "dc": "được", "dk": "được", "đk": "được",
+    "vs": "với", "v": "với",
+    "ng": "người", "ngta": "người ta",
+    "bn": "bao nhiêu", "ntn": "như thế nào",
+    "j": "gì", "z": "vậy", "zậy": "vậy",
+    "wa": "quá", "qá": "quá", "qa": "quá",
+    "bik": "biết", "bít": "biết", "bjt": "biết",
+    "trc": "trước", "hnay": "hôm nay", "hqua": "hôm qua",
+    "ace": "anh chị em", "ad": "admin", "tks": "cảm ơn", "thanks": "cảm ơn",
+    "mn": "mọi người", "mng": "mọi người", "ae": "anh em",
+    "sgk": "sách giáo khoa", "đh": "đại học", "thpt": "trung học phổ thông",
+    "thcs": "trung học cơ sở", "hs": "học sinh", "sv": "sinh viên", "gv": "giáo viên",
+    "vn": "việt nam", "tp": "thành phố", "hcm": "hồ chí minh",
+    "cntt": "công nghệ thông tin",
+}
+
+# ---------------------------------------------------------------------------
+# Từ ghép tiếng Việt 2 tiếng — gộp thành một đơn vị khi thống kê tần suất
+# ---------------------------------------------------------------------------
+# Mỗi phần tử là một cụm 2 tiếng (chữ thường, không dấu câu). Khi bật tùy chọn,
+# các cụm này được nối bằng dấu '_' để Counter coi là một "từ" duy nhất.
+COMPOUND_WORDS = [
+    "học sinh", "sinh viên", "giáo viên", "giảng viên", "đại học",
+    "việt nam", "hà nội", "hồ chí minh", "thành phố", "đất nước", "quê hương",
+    "công nghệ", "thông tin", "máy tính", "phần mềm", "phần cứng", "dữ liệu",
+    "trí tuệ", "nhân tạo", "lập trình", "khoa học", "kỹ thuật", "công nghiệp",
+    "kinh tế", "xã hội", "chính trị", "văn hóa", "giáo dục", "y tế",
+    "gia đình", "bạn bè", "thầy cô", "bố mẹ", "ông bà", "anh em",
+    "cuộc sống", "công việc", "thời gian", "không gian", "môi trường", "tự nhiên",
+    "hạnh phúc", "ước mơ", "tương lai", "hiện tại", "quá khứ",
+    "phát triển", "tiến bộ", "hòa bình", "độc lập", "tự do", "thành công",
+]
+
+# Ký tự nối hai tiếng của một từ ghép trong văn bản đã chuẩn hóa.
+COMPOUND_JOINER = "_"
+
+# ---------------------------------------------------------------------------
 # Cấu hình cửa sổ
 # ---------------------------------------------------------------------------
 APP_TITLE = "Phân tích văn bản — Text Analyzer"
