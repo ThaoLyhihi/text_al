@@ -1,0 +1,3 @@
+Phân tích văn bản là một bài toán cơ bản nhưng quan trọng. Văn bản có thể dài hoặc ngắn!
+Chúng ta đếm số từ, số ký tự và số câu. Liệu từ nào xuất hiện nhiều nhất? Từ "văn" và từ "bản" lặp lại khá nhiều.
+Xử lý chuỗi nâng cao giúp ta hiểu dữ liệu. Dữ liệu là vàng; phân tích là chìa khóa.
